@@ -12,7 +12,7 @@
       ((3) (vector (vector-ref vec 0) (vector-ref vec 1) (cons n (vector-ref vec 2))))))
   (define (go n step from to spare vec)
     (if (zero? step)
-        (if (zero? n) vec (go (- n 1) 0 from spare to (add vec from n)))
+        (if (zero? n) vec (go (- n 1) 0 from to spare (add vec from n)))
         (let ((mid (expt 2 (- n 1))))
           (if (< step mid)
               (go (- n 1) step from spare to (add vec from n))
