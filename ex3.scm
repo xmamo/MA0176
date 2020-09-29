@@ -26,10 +26,11 @@
            (string-index-of digits (string-ref numeral (- len 1)))))))
 
 (define (fractional-rep->number digits numeral)
-  (let ((len (string-length numeral)))
-    (/ (+ (string-index-of digits (string-head numeral))
-          (if (= len 1) 0 (fractional-rep->number digits (string-tail numeral))))
-       (string-length digits))))
+  (/ (if (= (string-length numeral) 1)
+         (string-index-of digits (string-head numeral))
+         (+ (string-index-of digits (string-head numeral))
+            (fractional-rep->number digits (string-tail numeral))))
+     (string-length digits)))
 
 (define (rep-parts numeral)
   (let ((i (string-index-of numeral #\.)))
