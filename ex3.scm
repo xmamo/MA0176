@@ -34,9 +34,9 @@
 
 (define (rep-parts numeral)
   (let ((i (string-index-of numeral #\.)))
-    (if (= i -1)
-        (cons numeral #f)
-        (cons (substring numeral 0 i) (substring numeral (+ i 1))))))
+    (if i
+        (cons (substring numeral 0 i) (substring numeral (+ i 1)))
+        (cons numeral #f))))
 
 (define (string-head str)
   (string-ref str 0))
@@ -46,7 +46,7 @@
 
 (define (string-index-of str c)
   (define (go i)
-    (cond ((>= i (string-length str)) -1)
+    (cond ((>= i (string-length str)) #f)
           ((char=? (string-ref str i) c) i)
           (else (go (+ i 1)))))
   (go 0))

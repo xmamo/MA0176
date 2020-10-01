@@ -1,11 +1,11 @@
 (#%require schemeunit)
 
 (define (belong? x xs)
-  (>= (position x xs) 0))
+  (if (position x xs) #t #f))
 
 (define (position x xs)
   (define (go x xs i)
-    (cond ((null? xs) -1)
+    (cond ((null? xs) #f)
           ((equal? (car xs) x) i)
           (else (go x (cdr xs) (+ i 1)))))
   (go x xs 0))
