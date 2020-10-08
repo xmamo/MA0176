@@ -17,8 +17,8 @@
                        (numeral1-rest (substring numeral1 0 (- len1 1)))
                        (numeral2-rest (substring numeral2 0 (- len2 1)))
                        (lsd-carry-sum (btr-digit-sum numeral1-lsd numeral2-lsd carry))
-                       (head-sum (btr-sum-carry numeral1-rest numeral2-rest (car lsd-carry-sum))))
-                  (btr-normalize (string-append head-sum (string (cdr lsd-carry-sum)))))))))
+                       (rest-sum (btr-sum-carry numeral1-rest numeral2-rest (car lsd-carry-sum))))
+                  (btr-normalize (string-append rest-sum (string (cdr lsd-carry-sum)))))))))
 
 (define (btr-digit-sum digit1 digit2 carry)
   (let ((args (string digit1 digit2 carry)))
