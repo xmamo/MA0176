@@ -75,7 +75,7 @@
 (define (btr-normalize numeral)
   (if (or (= (string-length numeral) 1) (not (char=? (string-ref numeral 0) #\0)))
       numeral
-      (string-tail numeral)))
+      (btr-normalize (string-tail numeral))))
 
 (define (string-head str)
   (string-ref str 0))
