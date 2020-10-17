@@ -2,7 +2,7 @@
 (#%require "hanoi.scm")
 
 (define (hanoi-disks n step)
-  (map-vector length (hanoi-disks-placement n step)))
+  (vector-map length (hanoi-disks-placement n step)))
 
 (define (hanoi-disks-placement n step)
   (define (add vec pos n)
@@ -17,7 +17,7 @@
           (if (< step mid)
               (go (- n 1) step from spare to (add vec from n))
               (go (- n 1) (- step mid) spare to from (add vec to n))))))
-  (map-vector reverse (go n step 1 2 3 (vector (list) (list) (list)))))
+  (vector-map reverse (go n step 1 2 3 (vector (list) (list) (list)))))
 
 (define (hanoi-picture n step)
   (define (go radii pos height)
@@ -33,7 +33,7 @@
 (define (above* top bottom)
   (if top (if bottom (above top bottom) top) bottom))
 
-(define (map-vector f vec)
+(define (vector-map f vec)
   (list->vector (map f (vector->list vec))))
 
 (check-equal? (hanoi-disks 3 0) (vector 3 0 0))
