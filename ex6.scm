@@ -3,13 +3,15 @@
 (define L-tile (eval (string->symbol "L-tile") (interaction-environment)))
 
 (define (L-tessellation n)
-  (set-tessellation-shift-step!)
-  (if (= n 1)
+  (define (go n)
+    (if (= n 1)
       L-tile
       (let* ((n-half (quotient n 2))
              (tile (L-tessellation n-half)))
         (glue-tiles (glue-tiles tile (transform tile n-half n-half 0))
                     (glue-tiles (transform tile 0 n 1) (transform tile n 0 3))))))
+  (set-tessellation-shift-step!)
+  (go n))
 
 (define (transform tile dx dy dz)
   (case (modulo dz 4)

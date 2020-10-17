@@ -7,9 +7,9 @@
 (define (hanoi-disks-placement n step)
   (define (add vec pos n)
     (case pos
-      ((1) (vector (cons n (vector-ref vec 0)) (vector-ref vec 1) (vector-ref vec 2)))
-      ((2) (vector (vector-ref vec 0) (cons n (vector-ref vec 1)) (vector-ref vec 2)))
-      ((3) (vector (vector-ref vec 0) (vector-ref vec 1) (cons n (vector-ref vec 2))))))
+      ((1) (list (cons n (car vec)) (cadr vec) (caddr vec)))
+      ((2) (list (car vec) (cons n (cadr vec)) (caddr vec)))
+      ((3) (list (car vec) (cadr vec) (cons n (caddr vec))))))
   (define (go n step from to spare vec)
     (if (zero? step)
         (if (zero? n) vec (go (- n 1) 0 from to spare (add vec from n)))
@@ -17,7 +17,7 @@
           (if (< step mid)
               (go (- n 1) step from spare to (add vec from n))
               (go (- n 1) (- step mid) spare to from (add vec to n))))))
-  (vector-map reverse (go n step 1 2 3 (vector (list) (list) (list)))))
+  (list->vector (map reverse (go n step 1 2 3 (list (list) (list) (list))))))
 
 (define (hanoi-picture n step)
   (define (go radii pos height)
