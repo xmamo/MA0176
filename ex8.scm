@@ -5,11 +5,11 @@
   (vector-map length (hanoi-disks-placement n step)))
 
 (define (hanoi-disks-placement n step)
-  (define (add rods pos n)
+  (define (add rods pos radius)
     (case pos
-      ((1) (list (cons n (car rods)) (cadr rods) (caddr rods)))
-      ((2) (list (car rods) (cons n (cadr rods)) (caddr rods)))
-      ((3) (list (car rods) (cadr rods) (cons n (caddr rods))))))
+      ((1) (list (cons radius (car rods)) (cadr rods) (caddr rods)))
+      ((2) (list (car rods) (cons radius (cadr rods)) (caddr rods)))
+      ((3) (list (car rods) (cadr rods) (cons radius (caddr rods))))))
   (define (go n step from to spare rods)
     (if (zero? step)
         (if (zero? n) rods (go (- n 1) 0 from to spare (add rods from n)))
